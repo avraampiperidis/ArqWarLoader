@@ -4,14 +4,61 @@ A simple Arquillian .war loader
 
 #### Install
 ```xml
- <dependency>
+<dependency>
     <groupId>com.protectsoft</groupId>
     <artifactId>ArqWarLoader</artifactId>
     <version>1.3</version>
     <scope>test</scope>
 </dependency>
 ```
+<b>OR just copy this class</b>
+https://github.com/avraampiperidis/ArqWarLoader/blob/master/src/main/java/com/protectsoft/arqwarloader/Arq.java  <br>
 
+<b>Usage</b>
+```java
+@RunWith(Arquillian.class)
+public class Test2IT {
+       
+    @Deployment 
+    //with defaults persistance.xml src/main/resources/META-INF/
+    //glassfish-web.xml  src/test/resources/META-INF/
+    public static Archive<?> createDeployment() {
+            return Arq.Init("mywebapp-1.0.war")
+                .loadWar();
+    }
+ 
+    @Test
+    public void test() {
+        assertTrue(true);
+    }   
+}
+```
+more options <br>
+```java
+@RunWith(Arquillian.class)
+public class TestIT  {
+    
+    @Deployment 
+    public static Archive<?> createDeployment() {
+          return Arq.Init("webapp-1.0_test.war","target/webapp-1.0.war"
+                  ,"src/main/resources/META-INF/persistence.xml","persistence.xml"
+                  ,"src/test/resources/META-INF/glassfish-web.xml","glassfish-web.xml")
+                .loadWar();
+    }
+   
+    @Test
+    public void test() {
+        assertTrue(true);
+    }
+}
+```
+extra methods <br>
+```java
+appendClasses(String[])
+appendLibraries(String[])
+appendPackages(String[])
+appendResources(String[])
+```
 
 ## License
 MIT License
