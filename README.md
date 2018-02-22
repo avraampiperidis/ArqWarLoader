@@ -4,6 +4,13 @@ A simple Arquillian .war loader
 
 #### Install
 ```xml
+<repositories>
+    <repository>
+        <id>jcenter</id>
+        <url>https://jcenter.bintray.com/</url>
+    </repository>
+</repositories>
+
 <dependency>
     <groupId>com.protectsoft</groupId>
     <artifactId>ArqWarLoader</artifactId>
